@@ -20,4 +20,15 @@ router.get("/:id", async (req, res) => {
   }
 });
 
+router.post("/", async (req, res) => {
+  const projectBody = req.body;
+
+  if (!projectBody.name || !projectBody.description) {
+    res.status(400).json({ message: "Project body required." });
+  } else {
+    const newProject = await Projects.insert(projectBody);
+    res.status(200).json(newProject);
+  }
+});
+
 module.exports = router;
