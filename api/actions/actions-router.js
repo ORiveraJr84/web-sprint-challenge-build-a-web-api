@@ -61,9 +61,13 @@ router.put("/:id", async (req, res) => {
 router.delete("/:id", async (req, res) => {
   const { id } = req.params;
   const deletedAction = await Actions.remove(id);
-  console.log("deletedAction", deletedAction);
 
-  res.status(200).json({});
+  if (deletedAction === 0) {
+    console.log("here");
+    res.status(404).json({ message: "Invalid ID." });
+  } else {
+    res.status(200).json({});
+  }
 });
 
 module.exports = router;
