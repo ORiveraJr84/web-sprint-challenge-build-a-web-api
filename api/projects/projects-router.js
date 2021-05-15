@@ -58,4 +58,11 @@ router.delete("/:id", async (req, res) => {
   }
 });
 
+router.get("/:id/actions", async (req, res) => {
+  const { id } = req.params;
+  const actions = await Projects.getProjectActions(id);
+
+  res.status(200).json(actions);
+});
+
 module.exports = router;
